@@ -12,26 +12,57 @@ import SwiftUI
 
 
 struct ContentView: View {
+    
+    @State var story = News(status: "", totalResults: 0, articles: [articlesData(source: sourceStruct(id:"", name:""), author: "", title: "", description: "", url: "", urlToImage: "", publishedAt: "", content: "")])
+    @State var desc = ""
+    @State var t = ""
+    @State var c = ""
+    @State var image = ""
     @State var apiURL = "https://newsapi.org/v2/top-headlines?country=us&apiKey=aa38365c9dbf479ebdb342c83d3c5141"
+    // API KEY aa38365c9dbf479ebdb342c83d3c5141
     
     var body: some View {
         
-        ScrollView {
-            LazyVStack {
-                ForEach(1...10, id: \.self) { count in
-                    
-                    
-                    
-                    Text("Hello, world")
-                    Spacer()
-
-                    // API KEY aa38365c9dbf479ebdb342c83d3c5141
+        NavigationView {
+            
+            HStack(spacing: 15) {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(t).bold()
+                    Text(desc)
                 }
-            }
-        }
+                AsyncImage (
+                    url: URL(string: image),
+                    content: { image in
+                    image.resizable()
+                        .frame(maxWidth: 100, maxHeight: 100)
+                        .aspectRatio(contentMode: .fit)
+                    }, placeholder: {
+                     ProgressView()
+                    }
+                )
+//                AsyncImage(url: URL(string: image))
+//                    .resizable()
+//                    .frame(maxWidth: 100, maxHeight: 100)
+//            }
+        
+            }.padding()
+            
+        }.navigationTitle("Headlines")
         .onAppear { self.loadData { (News)  in
             //print(News)
         } }
+        
+         
+    }
+        
+    
+    func getStory() {
+        loadData { (News) in
+            self.story = News
+
+            //t = story.articles[0].title
+            
+        }
     }
     
     func loadData(completion: @escaping (News) ->  ()) {
@@ -45,8 +76,25 @@ struct ContentView: View {
             let result = try! JSONDecoder().decode(News.self, from: data!)
             
             DispatchQueue.main.async {
-//                print(result)
-                print(result.articles[0].content)
+//                print(result.count)
+                print(result.articles[3].content)
+                
+                if let story_desc = result.articles[3].description {
+                    print(story_desc)
+                    desc = story_desc
+                }
+                if let story_content = result.articles[3].content {
+                    print(story_content)
+                    c = story_content
+                }
+                if let story_title = result.articles[3].title {
+                    print(story_title)
+                    t = story_title
+                }
+                if let story_image = result.articles[3].urlToImage {
+                    image = story_image
+                }
+                
 
                 completion(result)
             }
