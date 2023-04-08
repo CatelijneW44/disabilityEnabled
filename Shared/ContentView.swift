@@ -6,12 +6,20 @@
 //
 
 import SwiftUI
+//import SwiftyJSON
+
+
+
 
 struct ContentView: View {
+    
+    
+    @State var urlString = "https://newsapi.org/v2/everything?q=Apple&from=2023-03-08&sortBy=publishedAt&apiKey=aa38365c9dbf479ebdb342c83d3c5141"
     var body: some View {
         ScrollView {
             LazyVStack {
                 ForEach(1...10, id: \.self) { count in
+                    
                     Text("Hello, world")
                     Spacer()
 
@@ -20,6 +28,7 @@ struct ContentView: View {
             }
         }
     }
+
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -27,3 +36,5 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+
