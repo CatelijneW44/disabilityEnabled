@@ -11,13 +11,13 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var story = [NewsDisplay(author: "start", title: "", description: "", urlToImage: "", content: "")]
-    
+    @State var story = [NewsDisplay(author: "start", title: "", description: "", urlToImage: "", content: "", url: "")]
     @State var desc = ""
     @State var t = ""
     @State var c = ""
     @State var image = ""
     @State var author = ""
+    @State var u = ""
     @State var apiURL = "https://newsapi.org/v2/top-headlines?country=us&apiKey=aa38365c9dbf479ebdb342c83d3c5141"
     // API KEY aa38365c9dbf479ebdb342c83d3c5141
     
@@ -28,7 +28,7 @@ struct ContentView: View {
             VStack {
             ForEach(story) { result in
                 
-                NavigationLink(destination: NewsView(title: result.title, author: result.author, content: result.content, image: result.urlToImage )) {
+            NavigationLink(destination: NewsView(title: result.title, author: result.author, content: result.content, image: result.urlToImage, url: result.url)) {
             HStack(spacing: 15) {
                 VStack(alignment: .leading, spacing: 10) {
                     Text(result.title).bold()
@@ -102,7 +102,10 @@ struct ContentView: View {
                 if let story_author = result.articles[i].author {
                     author = story_author
                 }
-                story.append(NewsDisplay(author: author, title: t, description: desc, urlToImage: image, content: c))
+                if let story_url = result.articles[i].url {
+                    u = story_url
+                }
+                story.append(NewsDisplay(author: author, title: t, description: desc, urlToImage: image, content: c, url: u))
                     
                 if story[0].author == "start" {
                     story.remove(at: 0)
@@ -131,6 +134,7 @@ struct NewsDisplay : Identifiable {
     var description : String
     var urlToImage : String
     var content : String
+    var url : String
 }
                              
 

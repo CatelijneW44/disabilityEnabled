@@ -13,6 +13,8 @@ struct NewsView : View {
     @State var author : String
     @State var content : String
     @State var image : String
+    @State var url : String
+
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
@@ -30,6 +32,10 @@ struct NewsView : View {
                     }, placeholder: {
                      ProgressView()
                     })
+                Text("Continue Reading")
+                    .onTapGesture {
+                        UIApplication.shared.open(URL(string: url)!, options: [:])
+                    }
             }
             .padding()
         }}}
