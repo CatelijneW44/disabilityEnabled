@@ -120,7 +120,7 @@ struct NewsView : View {
             .padding()
             .background(Color(useGrayscale ? "white" : "lightBlue"))
                     //.ignoresSafeArea()
-                    .edgesIgnoringSafeArea(.all)
+                    //.edgesIgnoringSafeArea(.all)
         }
         
 }
