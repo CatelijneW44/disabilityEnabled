@@ -28,11 +28,13 @@ struct ContentView: View {
             VStack {
             ForEach(story) { result in
                 
-                
+                NavigationLink(destination: NewsView(title: result.title, author: result.author, content: result.content, image: result.urlToImage )) {
             HStack(spacing: 15) {
                 VStack(alignment: .leading, spacing: 10) {
                     Text(result.title).bold()
+                        .foregroundColor(.black)
                     Text(result.description)
+                        .foregroundColor(.black)
                     
                 }
                 AsyncImage (
@@ -48,6 +50,7 @@ struct ContentView: View {
             }.padding()
             .navigationTitle("Headlines")
             
+            }
             }
             }
             }
@@ -81,7 +84,6 @@ struct ContentView: View {
             
             DispatchQueue.main.async {
                 
-               
                 if let story_desc = result.articles[i].description {
                     print(story_desc)
                     desc = story_desc
@@ -105,8 +107,6 @@ struct ContentView: View {
                 if story[0].author == "start" {
                     story.remove(at: 0)
                 }
-                
-                
             }
             }
         }
