@@ -15,22 +15,25 @@ struct NewsView : View {
     @State var content : String
     @State var image : String
     @State var url : String
-    
+    let synthesizer = AVSpeechSynthesizer()
     @State private var useGrayscale = false
     @State private var showDyslexic = false
 
     var body: some View {
-        NavigationView {
             VStack {
+                Divider()
                 HStack {
+                    Spacer()
                     // Convert the image to black and white
                     Toggle(isOn: $useGrayscale) {
-                        Text("Colorblind")
+                        Text("Color vision deficiency")
+                            .font(.footnote)
                     }
                     
                     // Change all fonts to one easy one
                     Toggle(isOn: $showDyslexic) {
-                        Text("Dyslexic")
+                        Text("Dyslexia")
+                            .font(.footnote)
                     }
                     
                     // Read the article outloud
@@ -38,12 +41,13 @@ struct NewsView : View {
                         
                         // read the text
                         
-                        let synthesizer = AVSpeechSynthesizer()
-                        let utterance = AVSpeechUtterance(string: "put the article text here")
+                        
+                        var readingAloud = title + "--" + content
+                        let utterance = AVSpeechUtterance(string: readingAloud)
                         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
                         utterance.rate = 0.3
                         utterance.volume = 0.5
-                                            
+                        utterance.volume = 0.2
                         synthesizer.speak(utterance)
                         
                         
@@ -52,17 +56,44 @@ struct NewsView : View {
                             .imageScale(.large)
                             .foregroundColor(.accentColor)
                     }
-                    
+                    Spacer()
 
                 }
-                .padding()
+                
+                HStack() {
+                    Button() {
+                        
+                        // Pause audio
+                        
+                        synthesizer.pauseSpeaking(at: .word)
+                    
+                    } label: {
+                        Text("Pause Listening")
+                    }
+                    
+                    Text("  ")
+                    
+                    Button() {
+                        
+                        // Continue audio
+                        
+                        synthesizer.continueSpeaking()
+                    
+                    } label: {
+                        Text("Continue Listening")
+                    }
+                }
+                Divider()
                 
             VStack(alignment: .leading) {
                 Text(title).bold()
                     .monospacedDigit()
                     .font(.largeTitle)
+                    .multilineTextAlignment(.leading)
                 Text(author).font(.subheadline)
+                    .multilineTextAlignment(.leading)
                 Text(content)
+                    .multilineTextAlignment(.leading)
                 AsyncImage (
                     url: URL(string: image),
                     content: { image in
@@ -79,4 +110,5 @@ struct NewsView : View {
             }
             .padding()
         }
-        }}}
+        }
+}

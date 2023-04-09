@@ -17,46 +17,62 @@ struct ContentView: View {
     @State var image = ""
     @State var author = ""
     @State var u = ""
+    @State var titleList = []
+    @State var descList = []
+    @State var complete = ""
+    let synthesizer = AVSpeechSynthesizer()
     @State var apiURL = "https://newsapi.org/v2/top-headlines?country=us&apiKey=aa38365c9dbf479ebdb342c83d3c5141"
-    // API KEY aa38365c9dbf479ebdb342c83d3c5141
-    
-    //
+
     @State private var useGrayscale = false
-    @State private var useDyseie = false
+    @State private var showDyslexic = false
     
     var body: some View {
         
         NavigationView {
             
-            
-            
             ScrollView {
             VStack {
+                Text("Current Stories").bold()
+                    .font(.largeTitle
+                        .monospaced()
+                        .smallCaps()
+                    )
+                    
+                Divider()
+                
                 HStack {
+                    Spacer()
                     // Convert the image to black and white
                     Toggle(isOn: $useGrayscale) {
-                        Text("Color Impared")
+                        Text("Color vision deficiency")
+                            .font(.footnote)
                     }
                     
                     // Change all fonts to one easy one
-                    Toggle(isOn: $useDyseie) {
-                        Text("Dyslexic")
+                    Toggle(isOn: $showDyslexic) {
+                        Text("Dyslexia")
+                            .font(.footnote)
                     }
-                
-                    
                     
                     // Read the article outloud
                     Button() {
                         
                         // read the text
                         
-                        let synthesizer = AVSpeechSynthesizer()
-                        let utterance = AVSpeechUtterance(string: "put the article text here")
+                        for i in 0...9 {
+                            let titleNumber = titleList[i] as! String
+                            let descNumber = descList[i] as! String
+                            complete = complete + titleNumber + "--" + descNumber + "--"
+                        }
+                        
+                        
+                        let utterance = AVSpeechUtterance(string: complete)
                         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
                         utterance.rate = 0.3
                         utterance.volume = 0.5
-                                            
+                        utterance.volume = 0.2
                         synthesizer.speak(utterance)
+                        
                         
                         
                     } label: {
@@ -64,10 +80,34 @@ struct ContentView: View {
                             .imageScale(.large)
                             .foregroundColor(.accentColor)
                     }
-                    
-
+                    Spacer()
                 }
-                .padding()
+                
+                
+                HStack() {
+                    Button() {
+                        
+                        // Pause audio
+                        
+                        synthesizer.pauseSpeaking(at: .word)
+                    
+                    } label: {
+                        Text("Pause Listening")
+                    }
+                    
+                    Text("  ")
+                    
+                    Button() {
+                        
+                        // Continue audio
+                        
+                        synthesizer.continueSpeaking()
+                    
+                    } label: {
+                        Text("Continue Listening")
+                    }
+                }
+                Divider()
                 
                 VStack {
                     ForEach(story) { result in
@@ -78,9 +118,11 @@ struct ContentView: View {
                                     Text(result.title).bold()
                                         .foregroundColor(.black)
                                         .font(.custom(useDyseie ? "OpenDyslexic3-Regular" : "TimesNewRomanPSMT", fixedSize: 20))
+                                        .multilineTextAlignment(.leading)
                                     Text(result.description)
                                         .foregroundColor(.black)
                                         .font(.custom(useDyseie ? "OpenDyslexic3-Regular" : "TimesNewRomanPSMT", fixedSize: 15))
+                                        .multilineTextAlignment(.leading)
                                     
                                 }
                                 AsyncImage (
@@ -94,11 +136,12 @@ struct ContentView: View {
                                     }).grayscale(useGrayscale ? 1: 0) // toggles grayscale
                                 
                             }.padding()
-                                .navigationTitle("Headlines")
+                                .navigationBarTitle(Text("Headlines"), displayMode: .inline)
                             
                         }
                     }
                 }
+                Divider()
             }
             }
         }
@@ -132,16 +175,17 @@ struct ContentView: View {
             DispatchQueue.main.async {
                 
                 if let story_desc = result.articles[i].description {
-                    print(story_desc)
                     desc = story_desc
+                    descList.append(desc)
+                    //print(descList)
                 }
                 if let story_content = result.articles[i].content {
-                    print(story_content)
                     c = story_content
                 }
                 if let story_title = result.articles[i].title {
-                    print(story_title)
                     t = story_title
+                    titleList.append(t)
+                    //print(titleList)
                 }
                 if let story_image = result.articles[i].urlToImage {
                     image = story_image
