@@ -30,6 +30,11 @@ struct ContentView: View {
             
             ScrollView {
             VStack {
+                Text("Current Stories").bold()
+                    .monospacedDigit()
+                    .font(.largeTitle)
+                    .multilineTextAlignment(.leading)
+                
                 HStack {
                     // Convert the image to black and white
                     Toggle(isOn: $useGrayscale) {
@@ -47,11 +52,12 @@ struct ContentView: View {
                         // read the text
                         
                         let synthesizer = AVSpeechSynthesizer()
-                        let utterance = AVSpeechUtterance(string: "put the article text here")
+                        var readingAloud = t + "--" + desc
+                        let utterance = AVSpeechUtterance(string: readingAloud)
                         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
                         utterance.rate = 0.3
                         utterance.volume = 0.5
-                                            
+                        utterance.volume = 0.2
                         synthesizer.speak(utterance)
                         
                         
@@ -87,11 +93,12 @@ struct ContentView: View {
                                     }).grayscale(useGrayscale ? 1: 0) // toggles grayscale
                                 
                             }.padding()
-                                .navigationTitle("Headlines")
+                                .navigationBarTitle(Text("Headlines"), displayMode: .inline)
                             
                         }
                     }
                 }
+                Divider()
             }
             }
         }

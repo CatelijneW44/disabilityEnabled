@@ -20,7 +20,6 @@ struct NewsView : View {
     @State private var showDyslexic = false
 
     var body: some View {
-        NavigationView {
             VStack {
                 HStack {
                     // Convert the image to black and white
@@ -39,11 +38,12 @@ struct NewsView : View {
                         // read the text
                         
                         let synthesizer = AVSpeechSynthesizer()
-                        let utterance = AVSpeechUtterance(string: "put the article text here")
+                        var readingAloud = title + "--" + content
+                        let utterance = AVSpeechUtterance(string: readingAloud)
                         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
                         utterance.rate = 0.3
                         utterance.volume = 0.5
-                                            
+                        utterance.volume = 0.2
                         synthesizer.speak(utterance)
                         
                         
@@ -79,4 +79,5 @@ struct NewsView : View {
             }
             .padding()
         }
-        }}}
+        }
+}
