@@ -15,7 +15,7 @@ struct NewsView : View {
     @State var content : String
     @State var image : String
     @State var url : String
-    
+    let synthesizer = AVSpeechSynthesizer()
     @State private var useGrayscale = false
     @State private var showDyslexic = false
 
@@ -37,7 +37,7 @@ struct NewsView : View {
                         
                         // read the text
                         
-                        let synthesizer = AVSpeechSynthesizer()
+                        
                         var readingAloud = title + "--" + content
                         let utterance = AVSpeechUtterance(string: readingAloud)
                         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
@@ -56,6 +56,30 @@ struct NewsView : View {
 
                 }
                 .padding()
+                
+                HStack() {
+                    Button() {
+                        
+                        // Pause audio
+                        
+                        synthesizer.pauseSpeaking(at: .word)
+                    
+                    } label: {
+                        Text("Pause Listening")
+                    }
+                    
+                    Text("  ")
+                    
+                    Button() {
+                        
+                        // Continue audio
+                        
+                        synthesizer.continueSpeaking()
+                    
+                    } label: {
+                        Text("Continue Listening")
+                    }
+                }
                 
             VStack(alignment: .leading) {
                 Text(title).bold()
