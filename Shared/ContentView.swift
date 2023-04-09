@@ -20,12 +20,9 @@ struct ContentView: View {
     @State var titleList = []
     @State var descList = []
     @State var complete = ""
-    //let str = String(decoding: data, as: UTF8.self)
     let synthesizer = AVSpeechSynthesizer()
     @State var apiURL = "https://newsapi.org/v2/top-headlines?country=us&apiKey=aa38365c9dbf479ebdb342c83d3c5141"
-    // API KEY aa38365c9dbf479ebdb342c83d3c5141
-    
-    //
+
     @State private var useGrayscale = false
     @State private var showDyslexic = false
     
@@ -36,19 +33,25 @@ struct ContentView: View {
             ScrollView {
             VStack {
                 Text("Current Stories").bold()
-                    .monospacedDigit()
-                    .font(.largeTitle)
-                    .multilineTextAlignment(.leading)
+                    .font(.largeTitle
+                        .monospaced()
+                        .smallCaps()
+                    )
+                    
+                Divider()
                 
                 HStack {
+                    Spacer()
                     // Convert the image to black and white
                     Toggle(isOn: $useGrayscale) {
-                        Text("Colorblind")
+                        Text("Color vision deficiency")
+                            .font(.footnote)
                     }
                     
                     // Change all fonts to one easy one
                     Toggle(isOn: $showDyslexic) {
-                        Text("Dyslexic")
+                        Text("Dyslexia")
+                            .font(.footnote)
                     }
                     
                     // Read the article outloud
@@ -77,8 +80,10 @@ struct ContentView: View {
                             .imageScale(.large)
                             .foregroundColor(.accentColor)
                     }
-                    
+                    Spacer()
                 }
+                
+                
                 HStack() {
                     Button() {
                         
@@ -102,9 +107,8 @@ struct ContentView: View {
                         Text("Continue Listening")
                     }
                 }
+                Divider()
                 
-                
-                .padding()
                 VStack {
                     ForEach(story) { result in
                         
@@ -113,8 +117,10 @@ struct ContentView: View {
                                 VStack(alignment: .leading, spacing: 10) {
                                     Text(result.title).bold()
                                         .foregroundColor(.black)
+                                        .multilineTextAlignment(.leading)
                                     Text(result.description)
                                         .foregroundColor(.black)
+                                        .multilineTextAlignment(.leading)
                                     
                                 }
                                 AsyncImage (

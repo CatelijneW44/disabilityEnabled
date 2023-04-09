@@ -21,15 +21,19 @@ struct NewsView : View {
 
     var body: some View {
             VStack {
+                Divider()
                 HStack {
+                    Spacer()
                     // Convert the image to black and white
                     Toggle(isOn: $useGrayscale) {
-                        Text("Colorblind")
+                        Text("Color vision deficiency")
+                            .font(.footnote)
                     }
                     
                     // Change all fonts to one easy one
                     Toggle(isOn: $showDyslexic) {
-                        Text("Dyslexic")
+                        Text("Dyslexia")
+                            .font(.footnote)
                     }
                     
                     // Read the article outloud
@@ -52,10 +56,9 @@ struct NewsView : View {
                             .imageScale(.large)
                             .foregroundColor(.accentColor)
                     }
-                    
+                    Spacer()
 
                 }
-                .padding()
                 
                 HStack() {
                     Button() {
@@ -80,13 +83,17 @@ struct NewsView : View {
                         Text("Continue Listening")
                     }
                 }
+                Divider()
                 
             VStack(alignment: .leading) {
                 Text(title).bold()
                     .monospacedDigit()
                     .font(.largeTitle)
+                    .multilineTextAlignment(.leading)
                 Text(author).font(.subheadline)
+                    .multilineTextAlignment(.leading)
                 Text(content)
+                    .multilineTextAlignment(.leading)
                 AsyncImage (
                     url: URL(string: image),
                     content: { image in
