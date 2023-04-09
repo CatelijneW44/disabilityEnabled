@@ -124,9 +124,11 @@ struct ContentView: View {
                                     Text(result.title).bold()
                                         .foregroundColor(.black)
                                         .multilineTextAlignment(.leading)
+                                        .font(.custom(showDyslexic ? "OpenDyslexic3-Regular" : "TimesNewRomanPSMT", fixedSize: 25))
                                     Text(result.description)
                                         .foregroundColor(.black)
                                         .multilineTextAlignment(.leading)
+                                        .font(.custom(showDyslexic ? "OpenDyslexic3-Regular" : "TimesNewRomanPSMT", fixedSize: 20))
                                     
                                 }
                                 AsyncImage (

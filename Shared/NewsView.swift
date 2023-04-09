@@ -89,12 +89,14 @@ struct NewsView : View {
             VStack(alignment: .leading) {
                 Text(title).bold()
                     .monospacedDigit()
-                    .font(.largeTitle)
+                    .font(.custom(showDyslexic ? "OpenDyslexic3-Regular" : "TimesNewRomanPSMT", fixedSize: 40))
                     .multilineTextAlignment(.leading)
                 Text(author).font(.subheadline)
                     .multilineTextAlignment(.leading)
+                    .font(.custom(showDyslexic ? "OpenDyslexic3-Regular" : "TimesNewRomanPSMT", fixedSize: 20))
                 Text(content)
                     .multilineTextAlignment(.leading)
+                    .font(.custom(showDyslexic ? "OpenDyslexic3-Regular" : "TimesNewRomanPSMT", fixedSize: 20))
                 AsyncImage (
                     url: URL(string: image),
                     content: { image in
@@ -105,6 +107,7 @@ struct NewsView : View {
                         ProgressView()
                     }).grayscale(useGrayscale ? 1: 0) // toggles grayscale
                 Text("Continue Reading")
+                    .font(.custom(showDyslexic ? "OpenDyslexic3-Regular" : "TimesNewRomanPSMT", fixedSize: 20))
                     .onTapGesture {
                         UIApplication.shared.open(URL(string: url)!, options: [:])
                     }
