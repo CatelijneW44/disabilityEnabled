@@ -88,11 +88,12 @@ struct NewsView : View {
             VStack(alignment: .leading) {
                 Text(title).bold()
                     .monospacedDigit()
-                    .font(.largeTitle)
+                    .font(.custom(showDyslexic ? "OpenDyslexic3-Regular" : "TimesNewRomanPSMT", fixedSize: 20))
                     .multilineTextAlignment(.leading)
                 Text(author).font(.subheadline)
-                    .multilineTextAlignment(.leading)
+                    .multilineTextAlignment(.leading).font(.custom(showDyslexic ? "OpenDyslexic3-Regular" : "TimesNewRomanPSMT", fixedSize: 13))
                 Text(content)
+                    .font(.custom(showDyslexic ? "OpenDyslexic3-Regular" : "TimesNewRomanPSMT", fixedSize: 15))
                     .multilineTextAlignment(.leading)
                 AsyncImage (
                     url: URL(string: image),

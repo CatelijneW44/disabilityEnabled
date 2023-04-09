@@ -117,11 +117,11 @@ struct ContentView: View {
                                 VStack(alignment: .leading, spacing: 10) {
                                     Text(result.title).bold()
                                         .foregroundColor(.black)
-                                        .font(.custom(useDyseie ? "OpenDyslexic3-Regular" : "TimesNewRomanPSMT", fixedSize: 20))
+                                        .font(.custom(showDyslexic ? "OpenDyslexic3-Regular" : "TimesNewRomanPSMT", fixedSize: 20))
                                         .multilineTextAlignment(.leading)
                                     Text(result.description)
                                         .foregroundColor(.black)
-                                        .font(.custom(useDyseie ? "OpenDyslexic3-Regular" : "TimesNewRomanPSMT", fixedSize: 15))
+                                        .font(.custom(showDyslexic ? "OpenDyslexic3-Regular" : "TimesNewRomanPSMT", fixedSize: 15))
                                         .multilineTextAlignment(.leading)
                                     
                                 }
