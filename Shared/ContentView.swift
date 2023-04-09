@@ -6,8 +6,7 @@
 //
 
 import SwiftUI
-
-
+import AVFoundation
 
 struct ContentView: View {
     
@@ -21,37 +20,78 @@ struct ContentView: View {
     @State var apiURL = "https://newsapi.org/v2/top-headlines?country=us&apiKey=aa38365c9dbf479ebdb342c83d3c5141"
     // API KEY aa38365c9dbf479ebdb342c83d3c5141
     
+    //
+    @State private var useGrayscale = false
+    @State private var showDyslexic = false
+    
     var body: some View {
         
         NavigationView {
+            
             ScrollView {
             VStack {
-            ForEach(story) { result in
-                
-            NavigationLink(destination: NewsView(title: result.title, author: result.author, content: result.content, image: result.urlToImage, url: result.url)) {
-            HStack(spacing: 15) {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text(result.title).bold()
-                        .foregroundColor(.black)
-                    Text(result.description)
-                        .foregroundColor(.black)
+                HStack {
+                    // Convert the image to black and white
+                    Toggle(isOn: $useGrayscale) {
+                        Text("Colorblind")
+                    }
                     
+                    // Change all fonts to one easy one
+                    Toggle(isOn: $showDyslexic) {
+                        Text("Dyslexic")
+                    }
+                    
+                    // Read the article outloud
+                    Button() {
+                        
+                        // read the text
+                        
+                        let synthesizer = AVSpeechSynthesizer()
+                        let utterance = AVSpeechUtterance(string: "put the article text here")
+                        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+                        utterance.rate = 0.3
+                        utterance.volume = 0.5
+                                            
+                        synthesizer.speak(utterance)
+                        
+                        
+                    } label: {
+                        Image(systemName: "speaker.wave.3.fill")
+                            .imageScale(.large)
+                            .foregroundColor(.accentColor)
+                    }
+                    
+
                 }
-                AsyncImage (
-                    url: URL(string: result.urlToImage),
-                    content: { image in
-                    image.resizable()
-                        .frame(maxWidth: 100, maxHeight: 100)
-                        .aspectRatio(contentMode: .fit)
-                    }, placeholder: {
-                     ProgressView()
-                    })
-        
-            }.padding()
-            .navigationTitle("Headlines")
-            
-            }
-            }
+                .padding()
+                VStack {
+                    ForEach(story) { result in
+                        
+                        NavigationLink(destination: NewsView(title: result.title, author: result.author, content: result.content, image: result.urlToImage, url: result.url)) {
+                            HStack(spacing: 15) {
+                                VStack(alignment: .leading, spacing: 10) {
+                                    Text(result.title).bold()
+                                        .foregroundColor(.black)
+                                    Text(result.description)
+                                        .foregroundColor(.black)
+                                    
+                                }
+                                AsyncImage (
+                                    url: URL(string: result.urlToImage),
+                                    content: { image in
+                                        image.resizable()
+                                            .frame(maxWidth: 100, maxHeight: 100)
+                                            .aspectRatio(contentMode: .fit)
+                                    }, placeholder: {
+                                        ProgressView()
+                                    }).grayscale(useGrayscale ? 1: 0) // toggles grayscale
+                                
+                            }.padding()
+                                .navigationTitle("Headlines")
+                            
+                        }
+                    }
+                }
             }
             }
         }
