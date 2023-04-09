@@ -22,24 +22,28 @@ struct ContentView: View {
     
     //
     @State private var useGrayscale = false
-    @State private var showDyslexic = false
+    @State private var useDyseie = false
     
     var body: some View {
         
         NavigationView {
+            
+            
             
             ScrollView {
             VStack {
                 HStack {
                     // Convert the image to black and white
                     Toggle(isOn: $useGrayscale) {
-                        Text("Colorblind")
+                        Text("Color Impared")
                     }
                     
                     // Change all fonts to one easy one
-                    Toggle(isOn: $showDyslexic) {
+                    Toggle(isOn: $useDyseie) {
                         Text("Dyslexic")
                     }
+                
+                    
                     
                     // Read the article outloud
                     Button() {
@@ -64,6 +68,7 @@ struct ContentView: View {
 
                 }
                 .padding()
+                
                 VStack {
                     ForEach(story) { result in
                         
@@ -72,8 +77,10 @@ struct ContentView: View {
                                 VStack(alignment: .leading, spacing: 10) {
                                     Text(result.title).bold()
                                         .foregroundColor(.black)
+                                        .font(.custom(useDyseie ? "OpenDyslexic3-Regular" : "TimesNewRomanPSMT", fixedSize: 20))
                                     Text(result.description)
                                         .foregroundColor(.black)
+                                        .font(.custom(useDyseie ? "OpenDyslexic3-Regular" : "TimesNewRomanPSMT", fixedSize: 15))
                                     
                                 }
                                 AsyncImage (

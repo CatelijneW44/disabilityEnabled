@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,8 @@
 		1CAD363329E1DB4F0025B046 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD362129E1DB4B0025B046 /* ContentView.swift */; };
 		1CAD363429E1DB4F0025B046 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CAD362229E1DB4F0025B046 /* Assets.xcassets */; };
 		1CAD363529E1DB4F0025B046 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1CAD362229E1DB4F0025B046 /* Assets.xcassets */; };
+		42907C3B29E27DB500BFB230 /* OpenDyslexic3-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42907C3929E27DB500BFB230 /* OpenDyslexic3-Regular.ttf */; };
+		42907C3C29E27DB500BFB230 /* OpenDyslexic3-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42907C3A29E27DB500BFB230 /* OpenDyslexic3-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,9 @@
 		1CAD362729E1DB4F0025B046 /* disabilities enable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "disabilities enable.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CAD362D29E1DB4F0025B046 /* disabilities enable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "disabilities enable.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CAD362F29E1DB4F0025B046 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		42907C3329E2773500BFB230 /* disabilities-enable--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "disabilities-enable--iOS--Info.plist"; sourceTree = "<group>"; };
+		42907C3929E27DB500BFB230 /* OpenDyslexic3-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenDyslexic3-Regular.ttf"; sourceTree = "<group>"; };
+		42907C3A29E27DB500BFB230 /* OpenDyslexic3-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenDyslexic3-Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +56,7 @@
 		1CAD361A29E1DB4B0025B046 = {
 			isa = PBXGroup;
 			children = (
+				42907C3329E2773500BFB230 /* disabilities-enable--iOS--Info.plist */,
 				1CAD361F29E1DB4B0025B046 /* Shared */,
 				1CAD362E29E1DB4F0025B046 /* macOS */,
 				1CAD362829E1DB4F0025B046 /* Products */,
@@ -64,6 +70,8 @@
 				1CAD362129E1DB4B0025B046 /* ContentView.swift */,
 				1CA291FB29E23B48001163FD /* NewsView.swift */,
 				1CA291F829E1E9BC001163FD /* NewsStruct.swift */,
+				42907C3A29E27DB500BFB230 /* OpenDyslexic3-Bold.ttf */,
+				42907C3929E27DB500BFB230 /* OpenDyslexic3-Regular.ttf */,
 				1CAD362229E1DB4F0025B046 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -142,7 +150,7 @@
 				};
 			};
 			buildConfigurationList = 1CAD361E29E1DB4B0025B046 /* Build configuration list for PBXProject "disabilities enable" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -173,6 +181,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42907C3B29E27DB500BFB230 /* OpenDyslexic3-Regular.ttf in Resources */,
+				42907C3C29E27DB500BFB230 /* OpenDyslexic3-Bold.ttf in Resources */,
 				1CAD363529E1DB4F0025B046 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,10 +333,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "disabilities-enable--iOS--Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -352,10 +363,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "disabilities-enable--iOS--Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
