@@ -32,12 +32,20 @@ struct ContentView: View {
             
             ScrollView {
             VStack {
+                HStack() {
                 Text("Current Stories").bold()
                     .font(.largeTitle
                         .monospaced()
                         .smallCaps()
                     )
-                    
+                }
+                .background(Color("lightBlue"))
+                .cornerRadius(20)
+//                .overlay(
+//                        RoundedRectangle(cornerRadius: 16)
+//                            .stroke(.blue)
+//                    )
+                
                 Divider()
                 VStack() {
                 HStack() {
@@ -110,14 +118,13 @@ struct ContentView: View {
                     Spacer()
                 }
                 }
-//                .background(Color.gray)
-//                .shadow(color: Color.gray, radius: 10, x: -10, y: 0)
-//                .edgesIgnoringSafeArea(.all)
+                .background(.white)
+                .cornerRadius(20)
                 Divider()
                 
-                VStack {
+                
                     ForEach(story) { result in
-                        
+                        VStack {
                         NavigationLink(destination: NewsView(title: result.title, author: result.author, content: result.content, image: result.urlToImage, url: result.url)) {
                             HStack(spacing: 15) {
                                 VStack(alignment: .leading, spacing: 10) {
@@ -146,9 +153,15 @@ struct ContentView: View {
                             
                         }
                     }
+                        .background(.white)
+                        .cornerRadius(20)
                 }
                 Divider()
-            }
+                   
+            } .background(Color(useGrayscale ? "white" : "lightBlue"))
+                    //.ignoresSafeArea()
+                    .edgesIgnoringSafeArea(.all)
+
             }
         }
         .onAppear { self.loadData { (News)  in

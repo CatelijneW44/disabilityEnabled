@@ -84,6 +84,8 @@ struct NewsView : View {
                     }
                     Spacer()
                 }
+                .background(.white)
+                .cornerRadius(20)
                 Divider()
                 
             VStack(alignment: .leading) {
@@ -112,7 +114,13 @@ struct NewsView : View {
                         UIApplication.shared.open(URL(string: url)!, options: [:])
                     }
             }
+            .background(.white)
+            .cornerRadius(20)
+        }
             .padding()
+            .background(Color(useGrayscale ? "white" : "lightBlue"))
+                    //.ignoresSafeArea()
+                    .edgesIgnoringSafeArea(.all)
         }
-        }
+        
 }
