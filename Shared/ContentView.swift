@@ -39,8 +39,8 @@ struct ContentView: View {
                     )
                     
                 Divider()
-                
-                HStack {
+                VStack() {
+                HStack() {
                     Spacer()
                     // Convert the image to black and white
                     Toggle(isOn: $useGrayscale) {
@@ -53,7 +53,12 @@ struct ContentView: View {
                         Text("Dyslexia")
                             .font(.footnote)
                     }
-                    
+                    Spacer()
+                }//.shadow(radius: 10)
+                
+                
+                HStack() {
+                    Spacer()
                     // Read the article outloud
                     Button() {
                         
@@ -81,10 +86,6 @@ struct ContentView: View {
                             .foregroundColor(.accentColor)
                     }
                     Spacer()
-                }
-                
-                
-                HStack() {
                     Button() {
                         
                         // Pause audio
@@ -106,7 +107,12 @@ struct ContentView: View {
                     } label: {
                         Text("Continue Listening")
                     }
+                    Spacer()
                 }
+                }
+//                .background(Color.gray)
+//                .shadow(color: Color.gray, radius: 10, x: -10, y: 0)
+//                .edgesIgnoringSafeArea(.all)
                 Divider()
                 
                 VStack {

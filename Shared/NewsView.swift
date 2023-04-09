@@ -35,13 +35,17 @@ struct NewsView : View {
                         Text("Dyslexia")
                             .font(.footnote)
                     }
+                    Spacer()
                     
+
+                }
+                
+                HStack() {
+                    Spacer()
                     // Read the article outloud
                     Button() {
                         
                         // read the text
-                        
-                        
                         var readingAloud = title + "--" + content
                         let utterance = AVSpeechUtterance(string: readingAloud)
                         utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
@@ -57,10 +61,6 @@ struct NewsView : View {
                             .foregroundColor(.accentColor)
                     }
                     Spacer()
-
-                }
-                
-                HStack() {
                     Button() {
                         
                         // Pause audio
@@ -82,6 +82,7 @@ struct NewsView : View {
                     } label: {
                         Text("Continue Listening")
                     }
+                    Spacer()
                 }
                 Divider()
                 
